@@ -4,6 +4,8 @@ Fast and hassle-free way to display a photo gallery - *just one PHP file to a we
 
 # [Demo](https://rolle.wtf/quickndirty-photo-gallery/)
 
+![Screenshot](https://rolle.wtf/quickndirty-photo-gallery.png "Screenshot")
+
 ## Background story
 
 I often need to show quickly some photos to my friends and wouldn't like to hassle with Dropbox or Google Photo sharing all the time. It's often just easier to move folder to a sshfs-mounted remote folder and that's it. 
@@ -19,4 +21,3 @@ But wait, nginx doesn't have any directory listing... what was that 2000s-era on
 ## Todo
 
 - [ ] Add license
-- [ ] Add screenshot
