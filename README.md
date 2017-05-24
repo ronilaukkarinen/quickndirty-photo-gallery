@@ -26,7 +26,3 @@ But wait, nginx doesn't have any directory listing... what was that 2000s-era on
 - `$starting_page` - If `$pics_per_page` is less than photo amount, which page to start the gallery when entering index
 - `$columns_desktop` - How many columns to show on big screens. Applies only to masonry layout.
 - `$columns_ipad` - How many columns to show on iPad screen. Applies only to masonry layout.
-
-## Todo
-
-- [ ] Add license
