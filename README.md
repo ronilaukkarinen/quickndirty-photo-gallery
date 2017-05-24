@@ -1,8 +1,8 @@
-# Quick & dirty photo gallery
+## Quick & dirty photo gallery
 
 Fast and hassle-free way to display a photo gallery - *just one PHP file to a web server and that's it!*
 
-# [Demo](https://rolle.wtf/quickndirty-photo-gallery/)
+## [Demo](https://rolle.wtf/quickndirty-photo-gallery/)
 
 ![Screenshot](https://rolle.wtf/quickndirty-photo-gallery.png "Screenshot")
 
