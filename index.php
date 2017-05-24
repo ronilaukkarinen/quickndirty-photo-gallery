@@ -51,25 +51,21 @@
     display: inline-block;
     margin: 0 0 5px;
     width: 100%;
-  }
+  }  
+  <?php endif; ?>
 
   .nav svg {
     position: relative;
     top: 2px;
   }
+
   .nav a:hover {
     opacity: .5;
   }
-  <?php endif; ?>
 
   header p,
   footer p {
     font-size: 14px;
-  }
-
-  .gallery-image {
-    margin-left: auto;
-    margin-right: auto;
   }
   </style>
 </head>
