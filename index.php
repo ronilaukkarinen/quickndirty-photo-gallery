@@ -1,15 +1,17 @@
 <?php
   $gallerytitle = 'Quick and dirty photo gallery - just one PHP file!';
-  $layout = 'masonry'; // Choose: full or masonry
-  $page = 1; // Starting page
+  $layout = 'masonry';
   $pics_per_page = 30;
-  
+  $starting_page = 1;  
+  $columns_desktop = 4;
+  $columns_ipad = 2;
+
   if ( isset( $_GET[ 'page' ] ) ) :
-    $page = max(1, intval( $_GET['page'] ) );
+    $starting_page = max(1, intval( $_GET['page'] ) );
   endif;
 
   $extensions = array( 'jpg', 'jpeg', 'png', 'gif' );
-  $sortOrder = 1;
+  $sort_order = 1;
 ?>
 <!doctype html>
 <html>
@@ -42,7 +44,7 @@
   }
 
   .masonry {
-    column-count: 4;
+    column-count: <?php echo $columns_desktop; ?>;
     column-gap: 5px;
   }
 
@@ -51,7 +53,19 @@
     display: inline-block;
     margin: 0 0 5px;
     width: 100%;
-  }  
+  }
+
+  @media(max-width: 1024px) {
+    .masonry {
+      column-count: <?php echo $columns_ipad; ?>;
+    }
+  }
+
+  @media(max-width: 500px) {
+    .masonry {
+      column-count: 1;
+    }
+  }
   <?php endif; ?>
 
   .nav svg {
@@ -80,13 +94,13 @@
   <div class="masonry">
 <?php endif;
   $numpics = 0;
-    foreach ( scandir('.', $sortOrder) as $file ) :
+    foreach ( scandir('.', $sort_order) as $file ) :
       foreach ( $extensions as $extension ) :
         if ( strpos($file, '.'.$extension ) > 0 ) :
           $numpics++;
 
-            // Check if image should be shown on current $page
-            if ( $numpics > ( $page -1 ) * $pics_per_page && $numpics <= $page * $pics_per_page ) : 
+            // Check if image should be shown on current $starting_page
+            if ( $numpics > ( $starting_page -1 ) * $pics_per_page && $numpics <= $starting_page * $pics_per_page ) : 
               $caption = basename( $file, '.' . $extension );
 
               ?>
@@ -107,17 +121,17 @@ if ( 'masonry' === $layout ) : ?>
         <?php
           $numpages = ceil($numpics / $pics_per_page);
 
-          if ($page <= 1) : ?>
+          if ($starting_page <= 1) : ?>
             <svg xmlns="http://www.w3.org/2000/svg" fill="#333" width="16" height="16" viewBox="0 0 24 24"><path d="M0 12c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm7.58 0l5.988-5.995 1.414 1.416-4.574 4.579 4.574 4.59-1.414 1.416-5.988-6.006z"/></svg>
           <?php else : ?>
-            <a href="<?php echo basename(__FILE__); ?>?page=<?php echo ($page - 1); ?>"><svg xmlns="http://www.w3.org/2000/svg" fill="#888" width="16" height="16" viewBox="0 0 24 24"><path d="M0 12c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm7.58 0l5.988-5.995 1.414 1.416-4.574 4.579 4.574 4.59-1.414 1.416-5.988-6.006z"/></svg></a>
+            <a href="<?php echo basename(__FILE__); ?>?page=<?php echo ($starting_page - 1); ?>"><svg xmlns="http://www.w3.org/2000/svg" fill="#888" width="16" height="16" viewBox="0 0 24 24"><path d="M0 12c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm7.58 0l5.988-5.995 1.414 1.416-4.574 4.579 4.574 4.59-1.414 1.416-5.988-6.006z"/></svg></a>
           <?php endif; ?>
 
-        <?php echo '&nbsp;' . $page .'/' . $numpages. '&nbsp;';
-        if ($page >= $numpages) : ?>
+        <?php echo '&nbsp;' . $starting_page .'/' . $numpages. '&nbsp;';
+        if ($starting_page >= $numpages) : ?>
             <svg xmlns="http://www.w3.org/2000/svg" fill="#333" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.568 18.005l-1.414-1.415 4.574-4.59-4.574-4.579 1.414-1.416 5.988 5.995-5.988 6.005z"/></svg>
         <?php else : ?>
-          <a href="<?php echo basename(__FILE__); ?>?page=<?php echo ($page + 1); ?>"><svg xmlns="http://www.w3.org/2000/svg" fill="#888" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.568 18.005l-1.414-1.415 4.574-4.59-4.574-4.579 1.414-1.416 5.988 5.995-5.988 6.005z"/></svg></a>
+          <a href="<?php echo basename(__FILE__); ?>?page=<?php echo ($starting_page + 1); ?>"><svg xmlns="http://www.w3.org/2000/svg" fill="#888" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.568 18.005l-1.414-1.415 4.574-4.59-4.574-4.579 1.414-1.416 5.988 5.995-5.988 6.005z"/></svg></a>
         <?php endif; ?>
     </footer>
     <?php endif; ?>

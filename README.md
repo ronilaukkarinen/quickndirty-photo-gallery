@@ -18,6 +18,15 @@ But wait, nginx doesn't have any directory listing... what was that 2000s-era on
 2. Transfer index.php to a directory with images
 3. That's it!
 
+## Options
+
+- `$gallerytitle` - The title of your gallery, goes to `<title>` tag
+- `$layout` - Choose between `masonry` grid layout, or `full`. Full stacks the photos 100% full width.
+- `$pics_per_page` - How many pictures to show per page
+- `$starting_page` - If `$pics_per_page` is less than photo amount, which page to start the gallery when entering index
+- `$columns_desktop` - How many columns to show on big screens. Applies only to masonry layout.
+- `$columns_ipad` - How many columns to show on iPad screen. Applies only to masonry layout.
+
 ## Todo
 
 - [ ] Add license
