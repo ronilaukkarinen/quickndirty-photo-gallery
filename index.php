@@ -12,6 +12,15 @@
 
   $extensions = array( 'jpg', 'jpeg', 'png', 'gif' );
   $sort_order = 1;
+  error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+
+  if ( $_GET['get_thumb'] ) :
+    $url = $_GET['url'];
+    header('Content-type: image/jpeg');
+    $thumb = new Imagick( $url );
+    $thumb->resizeImage(500, 500, Imagick::FILTER_LANCZOS, 1, TRUE);
+    echo $thumb;
+  else :
 ?>
 <!doctype html>
 <html>
@@ -104,7 +113,7 @@
               $caption = basename( $file, '.' . $extension );
 
               ?>
-                  <?php if ( 'masonry' === $layout ) : ?><a href="<?php echo $file; ?>"><?php endif; ?><img class="gallery-image" src="<?php echo rawurlencode($file); ?>" alt="<?php echo $caption; ?>" /><?php if ( 'masonry' === $layout ) : ?></a><?php endif;
+                  <?php if ( 'masonry' === $layout ) : ?><a href="<?php echo $file; ?>"><?php endif; ?><img class="gallery-image" src="<?php if ( 'masonry' === $layout ) : ?>index.php?get_thumb=1&amp;url=<?php echo rawurlencode($file); ?><?php else : ?><?php echo rawurlencode($file); ?><?php endif; ?>" alt="<?php echo $caption; ?>" /><?php if ( 'masonry' === $layout ) : ?></a><?php endif;
                 break;
             endif;
         endif;
@@ -137,3 +146,4 @@ if ( 'masonry' === $layout ) : ?>
     <?php endif; ?>
 </body>
 </html>
+<?php endif; //if ( $_GET['get_thumb'] ) : ?>

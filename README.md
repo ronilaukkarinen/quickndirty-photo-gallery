@@ -12,6 +12,19 @@ I often need to show quickly some photos to my friends and wouldn't like to hass
 
 But wait, nginx doesn't have any directory listing... what was that 2000s-era one-file-php gallery? oh, but it was really ugly. I have to create one of my own, with more options while still retaining the simplicity. And so quick 'n dirty gallery was born.
 
+## Features 
+
+- Automatic thumbnail generation
+- Responsive columns
+- Masonry and full photo layouts
+- Paging
+
+## Requirements
+
+- Apache or NGINX webserver
+- PHP or HHVM
+- php-imagick module
+
 ## Usage
 
 1. Copy or clone index.php
